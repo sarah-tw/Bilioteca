@@ -42,6 +42,7 @@ public class Bilioteca {
 
     public Object selectMenu(int i) {
         if(!menuItems.containsKey(i)){
+            System.err.println("Select a valid option!!");
             return "Select a valid option!!";
         }
         return menuItems.get(i).execute(null);

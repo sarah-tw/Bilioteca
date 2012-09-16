@@ -6,6 +6,6 @@ public class CheckAction extends BasicSimpleAction {
     }
     @Override
     public Object execute(Object arg) {
-        return null;
+        return "Please talk to librarian. Thank you.";
     }
 }

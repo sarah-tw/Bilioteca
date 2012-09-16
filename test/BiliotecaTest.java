@@ -33,5 +33,13 @@ public class BiliotecaTest {
         Bilioteca bilioteca = new Bilioteca();
         List books = (List)bilioteca.selectMenu(1);
         assertEquals(5, books.size());
+        assertEquals("2 - Test Driven Development", books.get(1));
+    }
+
+    @Test
+    public void shouldBeInformedToGetLibrarianWhenCheckLibraryNumber(){
+        Bilioteca bilioteca = new Bilioteca();
+        String notice = (String)bilioteca.selectMenu(3);
+        assertEquals("Please talk to librarian. Thank you.", notice);
     }
 }

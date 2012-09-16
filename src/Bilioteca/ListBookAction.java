@@ -9,11 +9,11 @@ public class ListBookAction extends BasicSimpleAction {
     public ListBookAction(String name){
         this.name = name;
 
-        this.bookList.add("Ruby Programming Language");
-        this.bookList.add("Ruby Programming Language");
-        this.bookList.add("Ruby Programming Language");
-        this.bookList.add("Ruby Programming Language");
-        this.bookList.add("Ruby Programming Language");
+        this.bookList.add("1 - Ruby Programming Language");
+        this.bookList.add("2 - Test Driven Development");
+        this.bookList.add("3 - Clean Code");
+        this.bookList.add("4 - Head First Java");
+        this.bookList.add("5 - Extreme Programming");
     }
 
     public Object execute(Object arg) {
