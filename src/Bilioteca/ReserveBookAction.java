@@ -40,7 +40,7 @@ public class ReserveBookAction implements SimpleAction {
     }
 
     private boolean bookExist(String command) {
-        ListBookAction bookList = new ListBookAction();
+        ListBookAction bookList = new ListBookAction(this.out);
         if(bookList.getBookList().containsKey(Integer.parseInt(command))){
             System.out.println("Thank You! Enjoy the book.");
             return true;

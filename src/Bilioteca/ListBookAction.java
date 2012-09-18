@@ -1,10 +1,15 @@
 package Bilioteca;
 
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class ListBookAction implements SimpleAction {
     private HashMap<Integer, String> bookList = new LinkedHashMap<Integer, String>();
+
+    private OutputStream out;
+
     public HashMap<Integer, String> getBookList() {
         return bookList;
     }
@@ -13,7 +18,8 @@ public class ListBookAction implements SimpleAction {
         return "Book List";
     }
 
-    public ListBookAction(){
+    public ListBookAction(OutputStream out){
+        this.out = out;
         this.bookList.put(1, "Ruby Programming Language");
         this.bookList.put(2, "Test Driven Development");
         this.bookList.put(3, "Clean Code");
@@ -22,10 +28,12 @@ public class ListBookAction implements SimpleAction {
     }
 
     public Object execute(Object arg, InputStream in) {
+        PrintWriter writer = new PrintWriter(this.out);
         Iterator it = bookList.keySet().iterator();
         while (it.hasNext()) {
             Integer k = (Integer) it.next();
-            System.out.println(k + " - " + bookList.get(k));
+            writer.println(k + " - " + bookList.get(k));
+            writer.flush();
         }
         return bookList;
     }

@@ -31,7 +31,7 @@ public class MenuList {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         try {
             String s = reader.readLine();
-            return selectMenu(Integer.valueOf(s));
+            return selectMenu(Integer.parseInt(s));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,7 +49,7 @@ public class MenuList {
     }
 
     private void initMenuItems() {
-        SimpleAction listBookAction = new ListBookAction();
+        SimpleAction listBookAction = new ListBookAction(out);
         SimpleAction reserveBookAction = new ReserveBookAction(out);
         SimpleAction checkAction = new CheckAction(out);
         SimpleAction exitAction = new ExitAction();
