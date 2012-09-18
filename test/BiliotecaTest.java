@@ -1,6 +1,10 @@
 import Bilioteca.Bilioteca;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -31,9 +35,9 @@ public class BiliotecaTest {
     @Test
     public void shouldViewAllBooksInLibrary(){
         Bilioteca bilioteca = new Bilioteca();
-        List books = (List)bilioteca.selectMenu(1);
+        HashMap books = (HashMap)bilioteca.selectMenu(1);
         assertEquals(5, books.size());
-        assertEquals("2 - Test Driven Development", books.get(1));
+        assertEquals("Ruby Programming Language", books.get(1));
     }
 
     @Test
@@ -42,4 +46,24 @@ public class BiliotecaTest {
         String notice = (String)bilioteca.selectMenu(3);
         assertEquals("Please talk to librarian. Thank you.", notice);
     }
+
+    @Test
+    public void shouldTestInput() throws Exception {
+        Bilioteca bilioteca = new Bilioteca();
+        ByteArrayInputStream in = new ByteArrayInputStream("3".getBytes());
+        String notice = (String)bilioteca.selectMenu(in);
+        assertEquals("Please talk to librarian. Thank you.", notice);
+    }
+
+    @Test
+    public void shouldGetSuccessMessageWhenReserveExistBook(){
+        byte[] book = "3".getBytes();
+        ByteArrayInputStream in = new ByteArrayInputStream(book);
+        Bilioteca bilioteca = new Bilioteca(in, null);
+        String notice = (String)bilioteca.selectMenu(2);
+        assertEquals("Thank you! Enjoy the book", notice);
+    }
+
+
+
 }

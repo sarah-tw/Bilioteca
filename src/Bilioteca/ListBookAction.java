@@ -1,24 +1,30 @@
 package Bilioteca;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.io.InputStream;
+import java.util.*;
 
 public class ListBookAction extends BasicSimpleAction {
-    private List<String> bookList = new LinkedList<String>();
+    private HashMap<Integer, String> bookList = new LinkedHashMap<Integer, String>();
+//    private List<String> bookList = new LinkedList<String>();
+
+    public HashMap<Integer, String> getBookList() {
+        return bookList;
+    }
 
     public ListBookAction(String name){
         this.name = name;
-
-        this.bookList.add("1 - Ruby Programming Language");
-        this.bookList.add("2 - Test Driven Development");
-        this.bookList.add("3 - Clean Code");
-        this.bookList.add("4 - Head First Java");
-        this.bookList.add("5 - Extreme Programming");
+        this.bookList.put(1, "Ruby Programming Language");
+        this.bookList.put(2, "Test Driven Development");
+        this.bookList.put(3, "Clean Code");
+        this.bookList.put(4, "Head First Java");
+        this.bookList.put(5, "Extreme Programming");
     }
 
-    public Object execute(Object arg) {
-        for(String item : bookList){
-            System.err.println(item);
+    public Object execute(Object arg, InputStream in) {
+        Iterator it = bookList.keySet().iterator();
+        while (it.hasNext()) {
+            Integer k = (Integer) it.next();
+            System.out.println(k + "-" + bookList.get(k));
         }
         return bookList;
     }
