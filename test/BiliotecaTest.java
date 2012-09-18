@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
@@ -23,19 +24,19 @@ public class BiliotecaTest {
         assertEquals("1 - Book List\n" +
                 "2 - Reserve a book\n" +
                 "3 - Check library number\n" +
-                "9 - Exit\n", bilioteca.menu());
+                "0 - Exit\n", bilioteca.getMenu().getMenuString());
     }
 
     @Test
     public void shouldGetResponseWhenIInputInvalidSelection() {
         Bilioteca bilioteca = new Bilioteca();
-        assertEquals("Select a valid option!!", bilioteca.selectMenu(5));
+        assertEquals("Select a valid option!!", bilioteca.getMenu().selectMenu(5));
     }
 
     @Test
     public void shouldViewAllBooksInLibrary(){
         Bilioteca bilioteca = new Bilioteca();
-        HashMap books = (HashMap)bilioteca.selectMenu(1);
+        HashMap books = (HashMap)bilioteca.getMenu().selectMenu(1);
         assertEquals(5, books.size());
         assertEquals("Ruby Programming Language", books.get(1));
     }
@@ -43,7 +44,7 @@ public class BiliotecaTest {
     @Test
     public void shouldBeInformedToGetLibrarianWhenCheckLibraryNumber(){
         Bilioteca bilioteca = new Bilioteca();
-        String notice = (String)bilioteca.selectMenu(3);
+        String notice = (String)bilioteca.getMenu().selectMenu(3);
         assertEquals("Please talk to librarian. Thank you.", notice);
     }
 
@@ -51,7 +52,7 @@ public class BiliotecaTest {
     public void shouldTestInput() throws Exception {
         Bilioteca bilioteca = new Bilioteca();
         ByteArrayInputStream in = new ByteArrayInputStream("3".getBytes());
-        String notice = (String)bilioteca.selectMenu(in);
+        String notice = (String)bilioteca.getMenu().selectMenu(in);
         assertEquals("Please talk to librarian. Thank you.", notice);
     }
 
@@ -59,11 +60,12 @@ public class BiliotecaTest {
     public void shouldGetSuccessMessageWhenReserveExistBook(){
         byte[] book = "3".getBytes();
         ByteArrayInputStream in = new ByteArrayInputStream(book);
-        Bilioteca bilioteca = new Bilioteca(in, null);
-        String notice = (String)bilioteca.selectMenu(2);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Bilioteca bilioteca = new Bilioteca(in, out);
+        System.out.print(bilioteca.getMenu().getMenuString());
+        String notice = (String)bilioteca.getMenu().selectMenu(2);
         assertEquals("Thank you! Enjoy the book", notice);
     }
-
 
 
 }

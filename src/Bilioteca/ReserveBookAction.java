@@ -1,9 +1,6 @@
 package Bilioteca;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,14 +9,22 @@ import java.io.InputStreamReader;
  * Time: 12:17 AM
  * To change this template use File | Settings | File Templates.
  */
-public class ReserveBookAction extends BasicSimpleAction {
-    public ReserveBookAction(String name) {
-        this.name = name;
+public class ReserveBookAction implements SimpleAction {
+    private OutputStream out;
+
+    public ReserveBookAction(OutputStream out) {
+        this.out = out;
     }
+    public String getName() {
+        return "Reserve a book";
+    }
+
 
     @Override
     public Object execute(Object arg, InputStream in) {
-        System.err.println("Please input the book's number:");
+        PrintWriter writer = new PrintWriter(this.out);
+        writer.println("Please input the book's number:");
+        writer.flush();
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String command = null;
         try {
@@ -35,7 +40,7 @@ public class ReserveBookAction extends BasicSimpleAction {
     }
 
     private boolean bookExist(String command) {
-        ListBookAction bookList = new ListBookAction("Book List");
+        ListBookAction bookList = new ListBookAction();
         if(bookList.getBookList().containsKey(Integer.parseInt(command))){
             System.out.println("Thank You! Enjoy the book.");
             return true;

@@ -2,9 +2,9 @@ package Bilioteca;
 
 import java.io.InputStream;
 
-public class ExitAction extends BasicSimpleAction {
-    public ExitAction(String name){
-        this.name = name;
+public class ExitAction implements SimpleAction {
+    public String getName() {
+        return "Exit";
     }
 
     @Override
@@ -12,4 +12,5 @@ public class ExitAction extends BasicSimpleAction {
         System.exit(0);
         return null;
     }
+
 }
