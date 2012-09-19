@@ -40,13 +40,17 @@ public class ReserveBookAction implements SimpleAction {
     }
 
     private boolean bookExist(String command) {
+        PrintWriter writer = new PrintWriter(this.out);
         ListBookAction bookList = new ListBookAction(this.out);
         if(bookList.getBookList().containsKey(Integer.parseInt(command))){
-            System.out.println("Thank You! Enjoy the book.");
+            writer.println("Thank You! Enjoy the book.");
+            writer.flush();
             return true;
         }else {
-            System.out.println("Sorry we don't have that book yet.");
+            writer.println("Sorry we don't have that book yet.");
+            writer.flush();
             return false;
         }
+
     }
 }
