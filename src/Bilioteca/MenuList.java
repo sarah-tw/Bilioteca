@@ -17,7 +17,7 @@ public class MenuList {
         initMenuItems();
     }
 
-    public Object selectMenu(int i) {
+    public Object selectMenu(int i) throws IOException {
         PrintWriter writer = new PrintWriter(this.out);
         if (!menuItems.containsKey(i)) {
             writer.println("Select a valid option!!");
@@ -55,11 +55,13 @@ public class MenuList {
         SimpleAction checkAction = new CheckAction(out);
         SimpleAction exitAction = new ExitAction();
         SimpleAction movieAction = new MoviesAction(out);
+        SimpleAction loginAction = new LoginAction(out);
 
         menuItems.put(1, listBookAction);
         menuItems.put(2, reserveBookAction);
         menuItems.put(3, checkAction);
         menuItems.put(4, movieAction);
+        menuItems.put(5, loginAction);
         menuItems.put(0, exitAction);
     }
 

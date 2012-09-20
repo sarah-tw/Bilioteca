@@ -1,12 +1,7 @@
 import Bilioteca.Bilioteca;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.List;
+import java.io.*;
 
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -15,11 +10,14 @@ public class BiliotecaTest {
     private ByteArrayInputStream in;
     private ByteArrayOutputStream out = new ByteArrayOutputStream();
     private String BOOKLIST = "1";
-    private String RESERVE = "2";
+    private String RESERVE_IO = "2";
     private String CHECK = "3";
     private String MOVIES = "4";
-    private String INVALID = "5";
-    private String EXIT = "0";
+    private String INVALID = "15";
+    private String VALIDE_USER = "000-0001 111111";
+    private String IN_VALIDE_USER = "000-0001 121212";
+    private Integer LOGIN = 5;
+    private Integer RESERVE = 2;
 
     @Test
     public void shouldGetWelcomeMessage() {
@@ -37,6 +35,7 @@ public class BiliotecaTest {
                 "2 - Reserve a book\n" +
                 "3 - Check library number\n" +
                 "4 - Movies List\n" +
+                "5 - Login\n" +
                 "0 - Exit\n", out.toString());
     }
 
@@ -70,10 +69,10 @@ public class BiliotecaTest {
     }
 
     @Test
-    public void shouldGetSuccessMessageWhenReserveExistBook(){
-        in = new ByteArrayInputStream(RESERVE.getBytes());
+    public void shouldGetSuccessMessageWhenReserveExistBook() throws IOException {
+        in = new ByteArrayInputStream(RESERVE_IO.getBytes());
         Bilioteca bilioteca = new Bilioteca(in, out);
-        bilioteca.getMenu().selectMenu(2);
+        bilioteca.getMenu().selectMenu(RESERVE);
         assertEquals("Please input the book's number:\n" +
                 "Thank You! Enjoy the book.\n", out.toString());
     }
@@ -87,6 +86,26 @@ public class BiliotecaTest {
         assertEquals("Movie Year    Director    Rating\n" +
                 "Sholay 1975   Ramesh  Sippy   N/A\n" +
                 "Spide-Man3 2012    Marc Webb   1\n", out.toString());
+    }
+
+    @Test
+    public void shouldGetSuccessMessageWhenLoginWithValidUser() throws IOException {
+        in = new ByteArrayInputStream(VALIDE_USER.getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Bilioteca bilioteca = new Bilioteca(in, out);
+        bilioteca.getMenu().selectMenu(LOGIN);
+        assertEquals("Please input username and password\n" +
+                "Login successfully!\n", out.toString());
+    }
+
+    @Test
+    public void shouldGetFailedMessageWhenLoginWithInValidUser() throws IOException {
+        in = new ByteArrayInputStream(IN_VALIDE_USER.getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Bilioteca bilioteca = new Bilioteca(in, out);
+        bilioteca.getMenu().selectMenu(LOGIN);
+        assertEquals("Please input username and password\n" +
+                "Wrong user name or password!\n", out.toString());
     }
 
 

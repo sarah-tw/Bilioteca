@@ -4,9 +4,11 @@ import java.io.*;
 
 public class ReserveBookAction implements SimpleAction {
     private OutputStream out;
+    private PrintWriter writer;
 
     public ReserveBookAction(OutputStream out) {
         this.out = out;
+        writer = new PrintWriter(out);
     }
     public String getName() {
         return "Reserve a book";
@@ -15,9 +17,11 @@ public class ReserveBookAction implements SimpleAction {
 
     @Override
     public Object execute(Object arg, InputStream in) {
-        PrintWriter writer = new PrintWriter(this.out);
-        writer.println("Please input the book's number:");
-        writer.flush();
+        printInputNumber();
+        return rentBook(in);
+    }
+
+    public Object rentBook(InputStream in) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String command = null;
         try {
@@ -30,6 +34,11 @@ public class ReserveBookAction implements SimpleAction {
         }else {
             return "Sorry we don't have that book yet";
         }
+    }
+
+    public void printInputNumber() {
+        writer.println("Please input the book's number:");
+        writer.flush();
     }
 
     private boolean bookExist(String command) {
