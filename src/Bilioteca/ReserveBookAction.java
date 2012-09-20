@@ -2,13 +2,6 @@ package Bilioteca;
 
 import java.io.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: sixiaojing
- * Date: 9/15/12
- * Time: 12:17 AM
- * To change this template use File | Settings | File Templates.
- */
 public class ReserveBookAction implements SimpleAction {
     private OutputStream out;
 

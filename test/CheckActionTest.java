@@ -1,7 +1,6 @@
 import Bilioteca.CheckAction;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 import static junit.framework.Assert.assertEquals;

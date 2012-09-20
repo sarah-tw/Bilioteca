@@ -41,6 +41,7 @@ public class MenuList {
     public String getMenuString() {
         Iterator it = menuItems.keySet().iterator();
         StringBuffer buffer = new StringBuffer();
+        buffer.append("=============Menu==========\n");
         while (it.hasNext()) {
             Integer k = (Integer) it.next();
             buffer.append(k + " - " + menuItems.get(k).getName()).append("\n");
@@ -53,10 +54,12 @@ public class MenuList {
         SimpleAction reserveBookAction = new ReserveBookAction(out);
         SimpleAction checkAction = new CheckAction(out);
         SimpleAction exitAction = new ExitAction();
+        SimpleAction movieAction = new MoviesAction(out);
 
         menuItems.put(1, listBookAction);
         menuItems.put(2, reserveBookAction);
         menuItems.put(3, checkAction);
+        menuItems.put(4, movieAction);
         menuItems.put(0, exitAction);
     }
 

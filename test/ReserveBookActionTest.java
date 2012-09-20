@@ -6,13 +6,6 @@ import java.io.ByteArrayOutputStream;
 
 import static junit.framework.Assert.assertEquals;
 
-/**
- * Created with IntelliJ IDEA.
- * User: twer
- * Date: 9/19/12
- * Time: 8:48 PM
- * To change this template use File | Settings | File Templates.
- */
 public class ReserveBookActionTest {
     @Test
     public void shouldGetSuccessMessageWhenRentBookSuccess() {
