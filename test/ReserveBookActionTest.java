@@ -1,4 +1,5 @@
 import Bilioteca.ReserveBookAction;
+import Bilioteca.Session;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -18,11 +19,23 @@ public class ReserveBookActionTest {
     }
 
     @Test
-    public void shouldGetSuccessMessageWhenRentBookSuccess() {
+    public void shouldGetLoginRemindWhenRentBookWithoutLogin() {
+        ReserveBookAction reserveBookAction = new ReserveBookAction(out);
+        Session session = new Session();
+        session.setLoggedIn(false);
+        reserveBookAction.execute(null, null, session);
+        assertEquals("You should login to reserve book!\n", out.toString());
+    }
+
+    @Test
+    public void shouldGetSuccessMessageWhenRentBookWithLogin() {
         in = new ByteArrayInputStream("5".getBytes());
         ReserveBookAction reserveBookAction = new ReserveBookAction(out);
-        reserveBookAction.rentBook(in);
-        assertEquals("Thank You! Enjoy the book.\n", out.toString());
+        Session session = new Session();
+        session.setLoggedIn(true);
+        reserveBookAction.execute(null, in, session);
+        assertEquals("Please input the book's number:\n" +
+                "Thank You! Enjoy the book.\n", out.toString());
     }
 
     @Test

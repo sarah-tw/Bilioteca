@@ -1,4 +1,5 @@
 import Bilioteca.Bilioteca;
+import Bilioteca.Session;
 import Bilioteca.LoginAction;
 import org.junit.Test;
 
@@ -69,14 +70,6 @@ public class BiliotecaTest {
         assertEquals("Please talk to librarian. Thank you.\n", out.toString());
     }
 
-    @Test
-    public void shouldGetSuccessMessageWhenReserveExistBook() throws IOException {
-        in = new ByteArrayInputStream(RESERVE_IO.getBytes());
-        Bilioteca bilioteca = new Bilioteca(in, out);
-        bilioteca.getMenu().selectMenu(RESERVE);
-        assertEquals("Please input the book's number:\n" +
-                "Thank You! Enjoy the book.\n", out.toString());
-    }
 
     @Test
     public void shouldGetMoviesListWhenInput4(){

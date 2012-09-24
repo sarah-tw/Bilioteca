@@ -17,8 +17,8 @@ public class ReserveBookAction implements SimpleAction {
 
     @Override
     public Object execute(Object arg, InputStream in, Session session) {
-        printInputNumber();
         if(session.isLoggedIn()){
+            printInputNumber();
             return rentBook(in);
         }else {
             writer.println("You should login to reserve book!");
