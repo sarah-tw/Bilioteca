@@ -21,7 +21,7 @@ public class CheckAction implements SimpleAction {
             writer.println("Please talk to librarian. Thank you.");
             writer.flush();
         }else {
-            writer.println("Si Xiaojing, 13012341234, 12#114");
+            writer.println(session.getDetail());
             writer.flush();
         }
 

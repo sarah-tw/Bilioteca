@@ -1,5 +1,6 @@
 import Bilioteca.CheckAction;
 import Bilioteca.Session;
+import Bilioteca.User;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -22,7 +23,9 @@ public class CheckActionTest {
         CheckAction checkAction = new CheckAction(out);
         Session session = new Session();
         session.setLoggedIn(true);
+        User user = new User("000-0001", "111111", "ZhangSan", "12#112", "13012341234");
+        session.setDetail(user);
         checkAction.execute(null, null, session);
-        assertEquals("Si Xiaojing, 13012341234, 12#114\n", out.toString());
+        assertEquals("ZhangSan 12#112 13012341234\n", out.toString());
     }
 }
