@@ -10,7 +10,7 @@ public class ListBookActionTest {
     public void shouldGetBookList() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         ListBookAction listBookAction = new ListBookAction(out);
-        listBookAction.execute(null, null);
+        listBookAction.execute(null, null, null);
         assertEquals("1 - Ruby Programming Language\n" +
                 "2 - Test Driven Development\n" +
                 "3 - Clean Code\n" +

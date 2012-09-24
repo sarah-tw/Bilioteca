@@ -1,4 +1,5 @@
 import Bilioteca.Bilioteca;
+import Bilioteca.LoginAction;
 import org.junit.Test;
 
 import java.io.*;
@@ -107,6 +108,7 @@ public class BiliotecaTest {
         assertEquals("Please input username and password\n" +
                 "Wrong user name or password!\n", out.toString());
     }
+
 
 
 }

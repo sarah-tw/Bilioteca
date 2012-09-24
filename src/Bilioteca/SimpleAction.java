@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public interface SimpleAction {
-    public Object execute(Object arg, InputStream in) throws IOException;
     public String getName();
+
+    Object execute(Object arg, InputStream in, Session session) throws IOException;
 }

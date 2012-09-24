@@ -27,7 +27,7 @@ public class ListBookAction implements SimpleAction {
         this.bookList.put(5, "Extreme Programming");
     }
 
-    public Object execute(Object arg, InputStream in) {
+    public Object execute(Object arg, InputStream in, Session session) {
         PrintWriter writer = new PrintWriter(this.out);
         Iterator it = bookList.keySet().iterator();
         while (it.hasNext()) {

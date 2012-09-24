@@ -8,7 +8,7 @@ public class ExitAction implements SimpleAction {
     }
 
     @Override
-    public Object execute(Object arg, InputStream in) {
+    public Object execute(Object arg, InputStream in, Session session) {
         System.exit(0);
         return null;
     }

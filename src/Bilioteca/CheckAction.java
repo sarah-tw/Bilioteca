@@ -15,10 +15,16 @@ public class CheckAction implements SimpleAction {
     }
 
     @Override
-    public Object execute(Object arg, InputStream in) {
+    public Object execute(Object arg, InputStream in, Session session) {
         PrintWriter writer = new PrintWriter(this.out);
-        writer.println("Please talk to librarian. Thank you.");
-        writer.flush();
-        return "Please talk to librarian. Thank you.";
+        if(!session.isLoggedIn()){
+            writer.println("Please talk to librarian. Thank you.");
+            writer.flush();
+        }else {
+            writer.println("Si Xiaojing, 13012341234, 12#114");
+            writer.flush();
+        }
+
+        return null;
     }
 }

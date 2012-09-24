@@ -1,5 +1,7 @@
 package Bilioteca;
 
+import com.sun.deploy.security.SessionCertStore;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,6 +12,7 @@ public class MenuList {
     private HashMap<Integer, SimpleAction> menuItems = new LinkedHashMap<Integer, SimpleAction>();
     private InputStream in;
     private OutputStream out;
+    private Session session = new Session();
 
     public MenuList(InputStream in, OutputStream out) {
         this.in = in;
@@ -24,7 +27,7 @@ public class MenuList {
             writer.flush();
             return "Select a valid option!!";
         }
-        return menuItems.get(i).execute(null, this.in);
+        return menuItems.get(i).execute(null, this.in, session);
     }
 
     public Object selectMenu(InputStream in) {

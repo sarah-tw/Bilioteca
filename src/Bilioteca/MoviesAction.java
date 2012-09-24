@@ -1,7 +1,5 @@
 package Bilioteca;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -13,7 +11,7 @@ public class MoviesAction implements SimpleAction{
     }
 
     @Override
-    public Object execute(Object arg, InputStream in) {
+    public Object execute(Object arg, InputStream in, Session session) {
         PrintWriter writer = new PrintWriter(this.out);
         writer.println("Movie Year    Director    Rating");
         writer.println("Sholay 1975   Ramesh  Sippy   N/A");

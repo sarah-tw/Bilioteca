@@ -11,7 +11,7 @@ public class MoviesActionTest {
     public void shouldShowMoviesList() {
         ByteOutputStream out = new ByteOutputStream();
         MoviesAction movies = new MoviesAction(out);
-        movies.execute(null, null);
+        movies.execute(null, null, null);
         assertEquals("Movie Year    Director    Rating\n" +
                 "Sholay 1975   Ramesh  Sippy   N/A\n" +
                 "Spide-Man3 2012    Marc Webb   1\n", out.toString());

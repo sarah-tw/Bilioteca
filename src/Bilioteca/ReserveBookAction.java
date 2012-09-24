@@ -16,7 +16,7 @@ public class ReserveBookAction implements SimpleAction {
 
 
     @Override
-    public Object execute(Object arg, InputStream in) {
+    public Object execute(Object arg, InputStream in, Session session) {
         printInputNumber();
         return rentBook(in);
     }
