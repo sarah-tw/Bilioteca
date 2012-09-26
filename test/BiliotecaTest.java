@@ -1,6 +1,8 @@
 import Bilioteca.Bilioteca;
+import Bilioteca.ConsoleWriter;
 import Bilioteca.Session;
 import Bilioteca.LoginAction;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
@@ -20,17 +22,21 @@ public class BiliotecaTest {
     private String IN_VALIDE_USER = "000-0001 121212";
     private Integer LOGIN = 5;
     private Integer RESERVE = 2;
+    @Before
+    public void set(){
+        ConsoleWriter.writer.setStream(out);
+    }
 
     @Test
     public void shouldGetWelcomeMessage() {
-        Bilioteca bilioteca = new Bilioteca(null, out);
+        Bilioteca bilioteca = new Bilioteca(null);
         bilioteca.welcome();
         assertEquals("Welcome to Bilioceta\n", out.toString());
     }
 
     @Test
     public void shouldShowMenuList() {
-        Bilioteca bilioteca = new Bilioteca(null, out);
+        Bilioteca bilioteca = new Bilioteca(null);
         bilioteca.printMenu();
         assertEquals("=============Menu==========\n" +
                 "1 - Book List\n" +
@@ -44,7 +50,7 @@ public class BiliotecaTest {
     @Test
     public void shouldGetResponseWhenIInputInvalidSelection() {
         in = new ByteArrayInputStream(INVALID.getBytes());
-        Bilioteca bilioteca = new Bilioteca(in, out);
+        Bilioteca bilioteca = new Bilioteca(in);
         bilioteca.getMenu().selectMenu(in);
         assertEquals("Select a valid option!!\n", out.toString());
     }
@@ -52,8 +58,7 @@ public class BiliotecaTest {
     @Test
     public void shouldViewAllBooksInLibraryWhenSelect1(){
         in = new ByteArrayInputStream(BOOKLIST.getBytes());
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        Bilioteca bilioteca = new Bilioteca(null, out);
+        Bilioteca bilioteca = new Bilioteca(null);
         bilioteca.getMenu().selectMenu(in);
         assertEquals("1 - Ruby Programming Language\n" +
                 "2 - Test Driven Development\n" +
@@ -65,7 +70,7 @@ public class BiliotecaTest {
     @Test
     public void shouldBeInformedToGetLibrarianWhenCheckLibraryNumber(){
         in = new ByteArrayInputStream(CHECK.getBytes());
-        Bilioteca bilioteca = new Bilioteca(null, out);
+        Bilioteca bilioteca = new Bilioteca(null);
         bilioteca.getMenu().selectMenu(in);
         assertEquals("Please talk to librarian. Thank you.\n", out.toString());
     }
@@ -74,8 +79,7 @@ public class BiliotecaTest {
     @Test
     public void shouldGetMoviesListWhenInput4(){
         in = new ByteArrayInputStream(MOVIES.getBytes());
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        Bilioteca bilioteca = new Bilioteca(null, out);
+        Bilioteca bilioteca = new Bilioteca(null);
         bilioteca.getMenu().selectMenu(in);
         assertEquals("Movie Year    Director    Rating\n" +
                 "Sholay 1975   Ramesh  Sippy   N/A\n" +
@@ -85,8 +89,7 @@ public class BiliotecaTest {
     @Test
     public void shouldGetSuccessMessageWhenLoginWithValidUser() throws IOException {
         in = new ByteArrayInputStream(VALIDE_USER.getBytes());
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        Bilioteca bilioteca = new Bilioteca(in, out);
+        Bilioteca bilioteca = new Bilioteca(in);
         bilioteca.getMenu().selectMenu(LOGIN);
         assertEquals("Please input username and password\n" +
                 "Login successfully!\n", out.toString());
@@ -95,8 +98,7 @@ public class BiliotecaTest {
     @Test
     public void shouldGetFailedMessageWhenLoginWithInValidUser() throws IOException {
         in = new ByteArrayInputStream(IN_VALIDE_USER.getBytes());
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        Bilioteca bilioteca = new Bilioteca(in, out);
+        Bilioteca bilioteca = new Bilioteca(in);
         bilioteca.getMenu().selectMenu(LOGIN);
         assertEquals("Please input username and password\n" +
                 "Wrong user name or password!\n", out.toString());

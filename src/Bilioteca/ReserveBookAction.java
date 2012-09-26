@@ -2,18 +2,10 @@ package Bilioteca;
 
 import java.io.*;
 
-public class ReserveBookAction implements SimpleAction {
-    private OutputStream out;
-    private PrintWriter writer;
-
-    public ReserveBookAction(OutputStream out) {
-        this.out = out;
-        writer = new PrintWriter(out);
-    }
+public class ReserveBookAction implements Action {
     public String getName() {
         return "Reserve a book";
     }
-
 
     @Override
     public Object execute(Object arg, InputStream in, Session session) {
@@ -21,8 +13,7 @@ public class ReserveBookAction implements SimpleAction {
             printInputNumber();
             return rentBook(in);
         }else {
-            writer.println("You should login to reserve book!");
-            writer.flush();
+            ConsoleWriter.writer.println("You should login to reserve book!");
         }
         return null;
 
@@ -44,20 +35,16 @@ public class ReserveBookAction implements SimpleAction {
     }
 
     public void printInputNumber() {
-        writer.println("Please input the book's number:");
-        writer.flush();
+        ConsoleWriter.writer.println("Please input the book's number:");
     }
 
     private boolean bookExist(String command) {
-        PrintWriter writer = new PrintWriter(this.out);
-        ListBookAction bookList = new ListBookAction(this.out);
+        ListBookAction bookList = new ListBookAction();
         if(bookList.getBookList().containsKey(Integer.parseInt(command))){
-            writer.println("Thank You! Enjoy the book.");
-            writer.flush();
+            ConsoleWriter.writer.println("Thank You! Enjoy the book.");
             return true;
         }else {
-            writer.println("Sorry we don't have that book yet.");
-            writer.flush();
+            ConsoleWriter.writer.println("Sorry we don't have that book yet.");
             return false;
         }
 

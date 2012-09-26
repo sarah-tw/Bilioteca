@@ -6,10 +6,6 @@ public class Session {
     private boolean login;
     private String detail;
 
-    public Session() {
-
-    }
-
     public String getDetail() {
         return detail;
     }
@@ -23,6 +19,6 @@ public class Session {
     }
 
     public void setDetail(User user) {
-        this.detail = user.getName() + " " + user.getAdress() + " " + user.getTelphone();
+        this.detail = user.getName() + " " + user.getAddress() + " " + user.getTelephone();
     }
 }

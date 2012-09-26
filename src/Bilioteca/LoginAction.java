@@ -4,15 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class LoginAction implements SimpleAction {
-    private ArrayList<String> loginList = new ArrayList<String>();
-    private OutputStream out;
-    private PrintWriter writer;
+public class LoginAction implements Action {
     private ArrayList<User> users = new ArrayList<User>();
 
-    public LoginAction(OutputStream out) {
-        this.out = out;
-        this.writer = new PrintWriter(out);
+    public LoginAction() {
         initialUserList();
     }
 
@@ -28,20 +23,17 @@ public class LoginAction implements SimpleAction {
         return "Login";
     }
     public void printInputLogin() {
-        writer.println("Please input username and password");
-        writer.flush();
+        ConsoleWriter.writer.println("Please input username and password");
     }
 
     public void login(InputStream in, Session session) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String command = reader.readLine();
         if(loginSuccess(command, session)){
-            writer.println("Login successfully!");
-            writer.flush();
+            ConsoleWriter.writer.println("Login successfully!");
         }else {
             session.setLoggedIn(false);
-            writer.println("Wrong user name or password!");
-            writer.flush();
+            ConsoleWriter.writer.println("Wrong user name or password!");
         }
     }
 

@@ -9,21 +9,16 @@ import java.util.LinkedHashMap;
 
 public class Bilioteca {
     private final InputStream in;
-    private final OutputStream out;
-    private PrintWriter writer;
-
     private MenuList menu;
 
     public Bilioteca() {
-        this(System.in, System.out);
+        this(System.in);
     }
 
 
-    public Bilioteca(InputStream in, OutputStream out) {
+    public Bilioteca(InputStream in) {
         this.in = in;
-        this.out = out;
-        this.writer = new PrintWriter(out);
-        this.menu = new MenuList(this.in, this.out);
+        this.menu = new MenuList(this.in);
     }
 
     public MenuList getMenu() {
@@ -31,13 +26,11 @@ public class Bilioteca {
     }
 
     public void printMenu() {
-        writer.print(menu.getMenuString());
-        writer.flush();
+        ConsoleWriter.writer.print(menu.getMenuString());
     }
 
     public void welcome() {
-        writer.println("Welcome to Bilioceta");
-        writer.flush();
+        ConsoleWriter.writer.println("Welcome to Bilioceta");
     }
 
 
@@ -49,12 +42,10 @@ public class Bilioteca {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(this.in));
                 String command = reader.readLine();
                 menu.selectMenu(Integer.valueOf(command));
-                writer.flush();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        writer.close();
     }
 
 

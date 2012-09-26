@@ -2,7 +2,7 @@ package Bilioteca;
 
 import java.io.InputStream;
 
-public class ExitAction implements SimpleAction {
+public class ExitAction implements Action {
     public String getName() {
         return "Exit";
     }

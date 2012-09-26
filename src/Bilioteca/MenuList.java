@@ -1,7 +1,5 @@
 package Bilioteca;
 
-import com.sun.deploy.security.SessionCertStore;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,22 +7,18 @@ import java.util.LinkedHashMap;
 
 public class MenuList {
 
-    private HashMap<Integer, SimpleAction> menuItems = new LinkedHashMap<Integer, SimpleAction>();
+    private HashMap<Integer, Action> menuItems = new LinkedHashMap<Integer, Action>();
     private InputStream in;
-    private OutputStream out;
     private Session session = new Session();
 
-    public MenuList(InputStream in, OutputStream out) {
+    public MenuList(InputStream in) {
         this.in = in;
-        this.out = out;
         initMenuItems();
     }
 
     public Object selectMenu(int i) throws IOException {
-        PrintWriter writer = new PrintWriter(this.out);
         if (!menuItems.containsKey(i)) {
-            writer.println("Select a valid option!!");
-            writer.flush();
+            ConsoleWriter.writer.println("Select a valid option!!");
             return "Select a valid option!!";
         }
         return menuItems.get(i).execute(null, this.in, session);
@@ -43,22 +37,22 @@ public class MenuList {
 
     public String getMenuString() {
         Iterator it = menuItems.keySet().iterator();
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append("=============Menu==========\n");
         while (it.hasNext()) {
             Integer k = (Integer) it.next();
-            buffer.append(k + " - " + menuItems.get(k).getName()).append("\n");
+            buffer.append(k).append(" - ").append(menuItems.get(k).getName()).append("\n");
         }
         return buffer.toString();
     }
 
     private void initMenuItems() {
-        SimpleAction listBookAction = new ListBookAction(out);
-        SimpleAction reserveBookAction = new ReserveBookAction(out);
-        SimpleAction checkAction = new CheckAction(out);
-        SimpleAction exitAction = new ExitAction();
-        SimpleAction movieAction = new MoviesAction(out);
-        SimpleAction loginAction = new LoginAction(out);
+        Action listBookAction = new ListBookAction();
+        Action reserveBookAction = new ReserveBookAction();
+        Action checkAction = new CheckAction();
+        Action exitAction = new ExitAction();
+        Action movieAction = new MoviesAction();
+        Action loginAction = new LoginAction();
 
         menuItems.put(1, listBookAction);
         menuItems.put(2, reserveBookAction);

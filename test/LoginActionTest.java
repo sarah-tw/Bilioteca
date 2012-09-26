@@ -1,5 +1,7 @@
+import Bilioteca.ConsoleWriter;
 import Bilioteca.LoginAction;
 import Bilioteca.Session;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -12,11 +14,15 @@ import static org.junit.Assert.assertTrue;
 
 public class LoginActionTest {
     private ByteArrayInputStream in;
-    private ByteArrayOutputStream out = new ByteArrayOutputStream();
     private Session session = new Session();
+    private ByteArrayOutputStream out = new ByteArrayOutputStream();
+    @Before
+    public void initWriter(){
+        ConsoleWriter.writer.setStream(out);
+    }
     @Test
     public void shouldShowInputLoginMessage() {
-        LoginAction login = new LoginAction(out);
+        LoginAction login = new LoginAction();
         login.printInputLogin();
         assertEquals("Please input username and password\n", out.toString());
     }
@@ -24,7 +30,7 @@ public class LoginActionTest {
     @Test
     public void shouldShowFailedMessageIfLoginIncorrect() throws IOException {
         in = new ByteArrayInputStream("000-0001 10111".getBytes());
-        LoginAction login = new LoginAction(out);
+        LoginAction login = new LoginAction();
         login.login(in, session);
         assertEquals("Wrong user name or password!\n", out.toString());
     }
@@ -32,7 +38,7 @@ public class LoginActionTest {
     @Test
     public void shouldShowSuccessMessageIfLoginCorrect()  throws IOException {
         in = new ByteArrayInputStream("000-0001 111111".getBytes());
-        LoginAction login = new LoginAction(out);
+        LoginAction login = new LoginAction();
         login.login(in, session);
         assertEquals("Login successfully!\n", out.toString());
     }
@@ -40,7 +46,7 @@ public class LoginActionTest {
     @Test
     public void shouldLoginInSession()  throws IOException {
         in = new ByteArrayInputStream("000-0001 111111".getBytes());
-        LoginAction login = new LoginAction(out);
+        LoginAction login = new LoginAction();
         login.execute(null, in, session);
         assertTrue(session.isLoggedIn());
     }
@@ -48,7 +54,7 @@ public class LoginActionTest {
     @Test
     public void shouldLoginFailedIfUsernamePasswordMismatch()  throws IOException {
         in = new ByteArrayInputStream("000-0001 111112".getBytes());
-        LoginAction login = new LoginAction(out);
+        LoginAction login = new LoginAction();
         Session session = new Session();
         login.execute(null, in, session);
         assertFalse(session.isLoggedIn());

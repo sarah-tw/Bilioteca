@@ -1,6 +1,8 @@
 import Bilioteca.CheckAction;
+import Bilioteca.ConsoleWriter;
 import Bilioteca.Session;
 import Bilioteca.User;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -8,19 +10,22 @@ import java.io.ByteArrayOutputStream;
 import static junit.framework.Assert.assertEquals;
 
 public class CheckActionTest {
+    private ByteArrayOutputStream out = new ByteArrayOutputStream();
+    @Before
+    public void initWriter(){
+        ConsoleWriter.writer.setStream(out);
+    }
     @Test
     public void shouldGetCheckMessageWhenIWantMyLibraryNumber() {
         Session session = new Session();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        CheckAction checkAction = new CheckAction(out);
+        CheckAction checkAction = new CheckAction();
         checkAction.execute(null, null, session);
         assertEquals("Please talk to librarian. Thank you.\n", out.toString());
     }
 
     @Test
     public void shouldGetDetailedInfoWhenICheckMyLibraryNumberWithLogin() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        CheckAction checkAction = new CheckAction(out);
+        CheckAction checkAction = new CheckAction();
         Session session = new Session();
         session.setLoggedIn(true);
         User user = new User("000-0001", "111111", "ZhangSan", "12#112", "13012341234");
