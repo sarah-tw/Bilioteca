@@ -1,20 +1,19 @@
-package Bilioteca;
+package bilioteca;
 
-import javax.swing.event.MenuListener;
-import java.awt.*;
 import java.io.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 
 public class Bilioteca {
     private final InputStream in;
     private MenuList menu;
+    private boolean running = true;
 
     public Bilioteca() {
         this(System.in);
     }
 
+    public boolean isRunning() {
+        return running;
+    }
 
     public Bilioteca(InputStream in) {
         this.in = in;
@@ -37,11 +36,13 @@ public class Bilioteca {
     public void service() {
         try {
             welcome();
-            while (true) {
+            while (running) {
                 printMenu();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(this.in));
                 String command = reader.readLine();
-                menu.selectMenu(Integer.valueOf(command));
+                if(Boolean.FALSE.equals(menu.selectMenu(Integer.valueOf(command)))){
+                    running = false;
+                };
             }
         } catch (Exception e) {
             e.printStackTrace();

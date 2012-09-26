@@ -1,4 +1,4 @@
-package Bilioteca;
+package bilioteca;
 
 import java.io.InputStream;
 
@@ -9,8 +9,8 @@ public class ExitAction implements Action {
 
     @Override
     public Object execute(Object arg, InputStream in, Session session) {
-        System.exit(0);
-        return null;
+        ConsoleWriter.writer.println("Bye!");
+        return Boolean.FALSE;
     }
 
 }

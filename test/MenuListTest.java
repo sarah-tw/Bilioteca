@@ -1,7 +1,7 @@
-import Bilioteca.ConsoleWriter;
+import bilioteca.ConsoleWriter;
 import org.junit.Before;
 import org.junit.Test;
-import Bilioteca.MenuList;
+import bilioteca.MenuList;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 

@@ -1,27 +1,23 @@
-import Bilioteca.Bilioteca;
-import Bilioteca.ConsoleWriter;
-import Bilioteca.Session;
-import Bilioteca.LoginAction;
+import bilioteca.Bilioteca;
+import bilioteca.ConsoleWriter;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
 
 import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 public class BiliotecaTest {
     private ByteArrayInputStream in;
     private ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private String BOOKLIST = "1";
-    private String RESERVE_IO = "2";
-    private String CHECK = "3";
-    private String MOVIES = "4";
-    private String INVALID = "15";
-    private String VALIDE_USER = "000-0001 111111";
-    private String IN_VALIDE_USER = "000-0001 121212";
-    private Integer LOGIN = 5;
-    private Integer RESERVE = 2;
+    private static final String EXIT = "0";
+    private static final String BOOKLIST = "1";
+    private static final String CHECK = "3";
+    private static final String MOVIES = "4";
+    private static final String INVALID = "15";
+    private static final String VALIDE_USER = "000-0001 111111";
+    private static final String IN_VALIDE_USER = "000-0001 121212";
+    private static final Integer LOGIN = 5;
     @Before
     public void set(){
         ConsoleWriter.writer.setStream(out);
@@ -91,7 +87,7 @@ public class BiliotecaTest {
         in = new ByteArrayInputStream(VALIDE_USER.getBytes());
         Bilioteca bilioteca = new Bilioteca(in);
         bilioteca.getMenu().selectMenu(LOGIN);
-        assertEquals("Please input username and password\n" +
+        assertEquals("Please input username and password separate by one space: \n" +
                 "Login successfully!\n", out.toString());
     }
 
@@ -100,8 +96,17 @@ public class BiliotecaTest {
         in = new ByteArrayInputStream(IN_VALIDE_USER.getBytes());
         Bilioteca bilioteca = new Bilioteca(in);
         bilioteca.getMenu().selectMenu(LOGIN);
-        assertEquals("Please input username and password\n" +
+        assertEquals("Please input username and password separate by one space: \n" +
                 "Wrong user name or password!\n", out.toString());
+    }
+
+
+    @Test
+    public void shouldGetExitWhenInput0() throws IOException {
+        in = new ByteArrayInputStream(EXIT.getBytes());
+        Bilioteca bilioteca = new Bilioteca(in);
+        bilioteca.service();
+        assertEquals(false, bilioteca.isRunning());
     }
 
 

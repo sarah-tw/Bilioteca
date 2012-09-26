@@ -1,4 +1,4 @@
-package Bilioteca;
+package bilioteca;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class LoginAction implements Action {
         return "Login";
     }
     public void printInputLogin() {
-        ConsoleWriter.writer.println("Please input username and password");
+        ConsoleWriter.writer.println("Please input username and password separate by one space: ");
     }
 
     public void login(InputStream in, Session session) throws IOException {

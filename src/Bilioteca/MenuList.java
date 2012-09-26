@@ -1,4 +1,4 @@
-package Bilioteca;
+package bilioteca;
 
 import java.io.*;
 import java.util.HashMap;

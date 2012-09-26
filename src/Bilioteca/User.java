@@ -1,4 +1,4 @@
-package Bilioteca;
+package bilioteca;
 
 public class User {
     private String username;

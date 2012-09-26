@@ -1,6 +1,6 @@
-import Bilioteca.ConsoleWriter;
-import Bilioteca.ReserveBookAction;
-import Bilioteca.Session;
+import bilioteca.ConsoleWriter;
+import bilioteca.ReserveBookAction;
+import bilioteca.Session;
 import org.junit.Before;
 import org.junit.Test;
 

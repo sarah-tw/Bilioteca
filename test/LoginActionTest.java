@@ -1,6 +1,6 @@
-import Bilioteca.ConsoleWriter;
-import Bilioteca.LoginAction;
-import Bilioteca.Session;
+import bilioteca.ConsoleWriter;
+import bilioteca.LoginAction;
+import bilioteca.Session;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class LoginActionTest {
     public void shouldShowInputLoginMessage() {
         LoginAction login = new LoginAction();
         login.printInputLogin();
-        assertEquals("Please input username and password\n", out.toString());
+        assertEquals("Please input username and password separate by one space: \n", out.toString());
     }
 
     @Test

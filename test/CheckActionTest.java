@@ -1,7 +1,7 @@
-import Bilioteca.CheckAction;
-import Bilioteca.ConsoleWriter;
-import Bilioteca.Session;
-import Bilioteca.User;
+import bilioteca.CheckAction;
+import bilioteca.ConsoleWriter;
+import bilioteca.Session;
+import bilioteca.User;
 import org.junit.Before;
 import org.junit.Test;
 
